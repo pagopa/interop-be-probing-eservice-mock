@@ -20,6 +20,7 @@ public class ProbingWebService {
   @ResponsePayload
   public ProbingResponse probing(@RequestPayload ProbingRequest probingRequest) {
     ProbingResponse resp = new ProbingResponse();
+
     log.info("SOAP call with OK result");
     resp.setDescription("OK");
     resp.setStatus("200");
