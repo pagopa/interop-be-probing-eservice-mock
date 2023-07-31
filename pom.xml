@@ -141,7 +141,7 @@
 						<source>src/main/resources/schema-definition.xsd</source>
 					</sources>
 					<outputDirectory>${basedir}/src/main/java/</outputDirectory>
-					<packageName>it.pagopa.interop.probing.eservice.mock.soap.probing.v1
+					<packageName>it.pagopa.interop.probing.eservice.mock.soap.probing
 					</packageName>
 					<clearOutputDir>false</clearOutputDir>
 				</configuration>
