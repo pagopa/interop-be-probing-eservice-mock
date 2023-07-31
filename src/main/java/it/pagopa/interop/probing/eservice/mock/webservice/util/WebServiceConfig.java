@@ -21,7 +21,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     MessageDispatcherServlet servlet = new MessageDispatcherServlet();
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean(servlet, "/probing");
+    return new ServletRegistrationBean(servlet, "/soap/interop/probing");
   }
 
   @Bean(name = "/soap/interop/probing")
