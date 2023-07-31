@@ -19,7 +19,7 @@ public class ProbingController {
   @Value("${aws.kms.public.key}")
   private String pKey;
 
-  @GetMapping(value = "/probing/v1", produces = "application/json")
+  @GetMapping(value = "/interop/probing", produces = "application/json")
   public ResponseEntity probingOk(@RequestHeader("Authorization") String authorizationHeader) {
     if (!SecurityUtil.checkJwtValid(authorizationHeader, pKey)) {
       log.info("Unauthorized to access");
@@ -30,7 +30,7 @@ public class ProbingController {
     return ResponseEntity.ok().build();
   }
 
-  @GetMapping(value = "/probingError/v1", produces = "application/json")
+  @GetMapping(value = "/error/interop/probing", produces = "application/json")
   public ResponseEntity probingWithError() {
     log.info("REST call with Error result ");
     Problem problem = Problem.builder().status(500L).detail("Internal server error").build();
