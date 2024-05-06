@@ -5,8 +5,11 @@ import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import io.jsonwebtoken.Jwts;
+import java.util.logging.Logger;
 
 public class SecurityUtil {
+
+  private static final Logger logger = Logger.getLogger(SecurityUtil.class.getName());
 
   public static boolean checkJwtValid(String authorizationHeader, String pKey) {
 
@@ -26,6 +29,7 @@ public class SecurityUtil {
 
       Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(authTrimmed);
     } catch (Exception e) {
+      logger.warning("Exception: " + e.getMessage());
       return false;
     }
     return true;
