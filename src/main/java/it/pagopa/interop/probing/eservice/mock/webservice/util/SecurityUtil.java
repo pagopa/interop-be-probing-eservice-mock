@@ -24,8 +24,6 @@ public class SecurityUtil {
 
       PublicKey publicKey = keyFactory.generatePublic(keySpec);
 
-      authTrimmed = authTrimmed.replace("d", "c");
-
       Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(authTrimmed);
     } catch (Exception e) {
       return false;
