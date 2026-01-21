@@ -33,7 +33,7 @@ public class ProbingController {
   @GetMapping(value = "/error/interop/probing", produces = "application/json")
   public ResponseEntity probingWithError() {
     log.info("REST call with Error result ");
-    Problem problem = Problem.builder().status(500L).detail("Internal server error").build();
+    Problem problem = Problem.builder().status(500).detail("Internal server error").build();
 
     return ResponseEntity.internalServerError().body(problem);
   }
