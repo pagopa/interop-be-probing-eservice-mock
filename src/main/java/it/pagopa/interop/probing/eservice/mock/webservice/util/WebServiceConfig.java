@@ -21,14 +21,14 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     MessageDispatcherServlet servlet = new MessageDispatcherServlet();
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean(servlet, "/status");
+    return new ServletRegistrationBean(servlet, "/soap/interop/probing/status");
   }
 
-  @Bean(name = "/status")
+  @Bean(name = "/soap/interop/probing/status")
   public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema probingSchema) {
     DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
     wsdl11Definition.setPortTypeName("ProbingService");
-    wsdl11Definition.setLocationUri("/status");
+    wsdl11Definition.setLocationUri("/soap/interop/probing/status");
     wsdl11Definition.setTargetNamespace("http://it/pagopa/interop/probing");
     wsdl11Definition.setSchema(probingSchema);
     return wsdl11Definition;
