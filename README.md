@@ -1,6 +1,6 @@
 # Probing E-service Mock
 
-Mock service to simulate the status of Public Administration e-services.
+Mock service to simulate the status of e-services.
 
 This repository contains both **REST** and **SOAP** endpoints for testing service status.
 
