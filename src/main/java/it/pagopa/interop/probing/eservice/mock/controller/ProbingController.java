@@ -34,7 +34,7 @@ public class ProbingController {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    log.info("Access Authorized");
+    log.info("Access Authorized with REST mode={}", mode);
 
     boolean success;
 

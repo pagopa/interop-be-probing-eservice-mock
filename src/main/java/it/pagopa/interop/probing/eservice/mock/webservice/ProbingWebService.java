@@ -43,12 +43,14 @@ public class ProbingWebService {
             throw new RuntimeException("Unauthorized");
         }
 
+        log.info("Access Authorized with SOAP");
+
         switch (uri) {
             case "/soap/interop/probing/ok/status":
                 resp.setDescription("OK");
                 resp.setStatus("200");
                 log.info("SOAP call OK result");
-                break;
+                return resp;
 
             case "/soap/interop/probing/error/status":
                 log.info("SOAP call ERROR result");
@@ -60,17 +62,15 @@ public class ProbingWebService {
                     resp.setDescription("OK");
                     resp.setStatus("200");
                     log.info("SOAP call OK result");
+                    return resp;
                 } else {
                     log.info("SOAP call ERROR result");
                     throw new RuntimeException("Internal server error");
                 }
-                break;
 
             default:
                 log.warn("SOAP call unknown endpoint: {}", uri);
                 throw new IllegalArgumentException("Unknown endpoint");
         }
-
-        return resp;
     }
 }
