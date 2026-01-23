@@ -8,17 +8,15 @@ This repository contains both **REST** and **SOAP** endpoints for testing servic
 
 ## REST Endpoints
 
-- `GET /rest/interop/probing/{mode}/status`  
-  - `mode`: `ok`, `error`, `random`  
-  - Header: `Authorization: Bearer <JWT>` (required)
+- GET /rest/interop/probing/ok/status  
+- GET /rest/interop/probing/error/status  
+- GET /rest/interop/probing/random/status  
 
----
+## SOAP Endpoints
 
-## SOAP Endpoint
-
-- `POST /soap/interop/probing/status`  
-  - SOAP payload defined in `schema-definition.xsd`  
-  - Always returns status 200 OK
+- POST /soap/interop/probing/ok/status  
+- POST /soap/interop/probing/error/status  
+- POST /soap/interop/probing/random/status  
 
 ---
 
