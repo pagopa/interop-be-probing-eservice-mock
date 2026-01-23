@@ -56,7 +56,7 @@ public class ProbingController {
         log.info("REST call OK result");
         return ResponseEntity.ok().build();
     } else {
-      log.info("REST call KO result");
+      log.info("REST call ERROR result");
       Problem problem = Problem.builder()
               .type("about:blank")
               .title("Internal Server Error")

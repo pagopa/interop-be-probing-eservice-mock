@@ -16,26 +16,48 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
-  @Bean
-  public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
-    MessageDispatcherServlet servlet = new MessageDispatcherServlet();
-    servlet.setApplicationContext(applicationContext);
-    servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean(servlet, "/soap/interop/probing/status");
-  }
 
-  @Bean(name = "/soap/interop/probing/status")
-  public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema probingSchema) {
-    DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-    wsdl11Definition.setPortTypeName("ProbingService");
-    wsdl11Definition.setLocationUri("/soap/interop/probing/status");
-    wsdl11Definition.setTargetNamespace("http://it/pagopa/interop/probing");
-    wsdl11Definition.setSchema(probingSchema);
-    return wsdl11Definition;
-  }
+    @Bean
+    public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext context) {
+        MessageDispatcherServlet servlet = new MessageDispatcherServlet();
+        servlet.setApplicationContext(context);
+        servlet.setTransformWsdlLocations(true);
+        return new ServletRegistrationBean<>(servlet, "/soap/interop/probing/*");
+    }
 
-  @Bean
-  public XsdSchema probingSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("schema-definition.xsd"));
-  }
+    @Bean(name = "okStatus")
+    public DefaultWsdl11Definition wsdlOk(XsdSchema probingSchema) {
+        DefaultWsdl11Definition wsdl = new DefaultWsdl11Definition();
+        wsdl.setPortTypeName("ProbingServiceOk");
+        wsdl.setLocationUri("/soap/interop/probing/ok/status");
+        wsdl.setTargetNamespace("http://it/pagopa/interop/probing");
+        wsdl.setSchema(probingSchema);
+        return wsdl;
+    }
+
+    @Bean(name = "errorStatus")
+    public DefaultWsdl11Definition wsdlError(XsdSchema probingSchema) {
+        DefaultWsdl11Definition wsdl = new DefaultWsdl11Definition();
+        wsdl.setPortTypeName("ProbingServiceError");
+        wsdl.setLocationUri("/soap/interop/probing/error/status");
+        wsdl.setTargetNamespace("http://it/pagopa/interop/probing");
+        wsdl.setSchema(probingSchema);
+        return wsdl;
+    }
+
+    @Bean(name = "randomStatus")
+    public DefaultWsdl11Definition wsdlRandom(XsdSchema probingSchema) {
+        DefaultWsdl11Definition wsdl = new DefaultWsdl11Definition();
+        wsdl.setPortTypeName("ProbingServiceRandom");
+        wsdl.setLocationUri("/soap/interop/probing/random/status");
+        wsdl.setTargetNamespace("http://it/pagopa/interop/probing");
+        wsdl.setSchema(probingSchema);
+        return wsdl;
+    }
+
+    @Bean
+    public XsdSchema probingSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("schema-definition.xsd"));
+    }
 }
+
