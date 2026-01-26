@@ -9,7 +9,9 @@ RUN mvn -q clean package -Dmaven.test.skip=true
 
 
 ## RUN ##
-FROM openjdk:17-alpine
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
 
 COPY --from=build /app/target/*.jar /app/app.jar
 
