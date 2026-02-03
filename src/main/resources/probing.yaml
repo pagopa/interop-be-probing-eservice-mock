@@ -50,6 +50,10 @@ paths:
                 $ref: "#/components/schemas/Problem"
         "400":
           description: "Bad request"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "500":
           description: "A managed error has occurred during the request elaboration"
           content:
