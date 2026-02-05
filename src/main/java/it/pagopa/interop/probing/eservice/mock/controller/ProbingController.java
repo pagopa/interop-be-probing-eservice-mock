@@ -1,7 +1,6 @@
 package it.pagopa.interop.probing.eservice.mock.controller;
 
 import java.util.Random;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
 
 import it.pagopa.interop.probing.eservice.mock.dtos.Problem;
 import it.pagopa.interop.probing.eservice.mock.webservice.util.SecurityUtil;
@@ -54,7 +54,17 @@ public class ProbingController {
 
     if (success) {
         log.info("REST call OK result");
-        return ResponseEntity.ok().build();
+        Problem problem = Problem.builder()
+        .type("about:blank")
+        .title("Service status OK")
+        .status(200)
+        .detail("OK")
+        .build();
+
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+            .body(problem);
     } else {
       log.info("REST call ERROR result");
       Problem problem = Problem.builder()
@@ -62,7 +72,6 @@ public class ProbingController {
               .title("Internal Server Error")
               .status(500)
               .detail("Internal Server Error")
-              .traceId(UUID.randomUUID().toString())
               .build();
 
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(problem);

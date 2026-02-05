@@ -38,8 +38,22 @@ paths:
       responses:
         "200":
           description: "The e-service is up and running"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: "Bad request"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "500":
           description: "A managed error has occurred during the request elaboration"
           content:
@@ -51,7 +65,7 @@ paths:
                 status: 500
                 title: "Internal Server Error"
                 detail: "There is a problem processing the request on the server."
-                traceId: "string"
+                correlationId: "string"
                 errors:
                   [
                     {
@@ -86,7 +100,7 @@ components:
           maxLength: 4096
           pattern: "^.{0,1024}$"
           type: string
-        traceId:
+        correlationId:
           type: string
           nullable: false
         errors:

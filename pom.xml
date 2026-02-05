@@ -171,6 +171,9 @@
 									@lombok.NoArgsConstructor
 									@lombok.AllArgsConstructor
 									@lombok.experimental.Accessors(chain = true, fluent = true)
+									@com.fasterxml.jackson.annotation.JsonInclude(
+										com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
+									)
 								</additionalModelTypeAnnotations>
 								<serializableModel>true</serializableModel>
 								<interfaceOnly>true</interfaceOnly>
